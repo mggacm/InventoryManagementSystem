@@ -18,10 +18,7 @@
             @Html.DisplayNameFor(model => model.FirstMidName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Purchase)
+            @Html.DisplayNameFor(model => model.PurchaseDate)
         </th>
         <th></th>
     </tr>
@@ -35,10 +32,7 @@
             @Html.DisplayFor(modelItem => item.FirstMidName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Purchase)
+            @Html.DisplayFor(modelItem => item.PurchaseDate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

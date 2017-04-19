@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace InventoryManagementSystem.Models
 {
-    public class Customer : Person
+    public class Customer
     {
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Last Purchase")]
-        public DateTime Purchase { get; set; }
+        public int ID { get; set; }
+        public string LastName { get; set; }
+        public string FirstMidName { get; set; }
 
-        
+        public DateTime PurchaseDate { get; set; }
+
+        public virtual ICollection<Purchase> Purchase{ get; set; }
     }
 }
