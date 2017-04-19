@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using InventoryManagementSystem.DAL;
 using InventoryManagementSystem.Models;
 using PagedList;
+using System.Data.Entity.Infrastructure;
 
 namespace InventoryManagementSystem.Controllers
 {
@@ -98,7 +99,7 @@ namespace InventoryManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
             }
-            catch (DataException /* dex */)
+            catch (RetryLimitExceededException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
@@ -142,7 +143,7 @@ namespace InventoryManagementSystem.Controllers
 
                     return RedirectToAction("Index");
                 }
-                catch (DataException /* dex */)
+                catch (RetryLimitExceededException /* dex */)
                 {
                     //Log the error (uncomment dex variable name and add a line here to write a log.
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
@@ -181,7 +182,7 @@ namespace InventoryManagementSystem.Controllers
                 db.Customers.Remove(customer);
                 db.SaveChanges();
             }
-            catch (DataException/* dex */)
+            catch (RetryLimitExceededException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
