@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using InventoryManagementSystem.DAL;
 using InventoryManagementSystem.Models;
+using PagedList;
 
 namespace InventoryManagementSystem.Controllers
 {
@@ -16,9 +17,48 @@ namespace InventoryManagementSystem.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Customers.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DataSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var customers = from s in db.Customers
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(s => s.LastName.Contains(searchString)
+                                        || s.FirstMidName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    customers = customers.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    customers = customers.OrderBy(s => s.Purchase);
+                    break;
+                case "date_desc":
+                    customers = customers.OrderByDescending(s => s.PurchaseDate);
+                    break;
+                default:
+                    customers = customers.OrderBy(s => s.LastName);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(customers.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Customer/Details/5
