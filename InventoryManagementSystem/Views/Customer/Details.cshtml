@@ -33,7 +33,31 @@
         <dd>
             @Html.DisplayFor(model => model.PurchaseDate)
         </dd>
-
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                </tr>
+                @foreach (var item in Model.Purchase)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Title)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Grade)
+                        </td>*@
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>
