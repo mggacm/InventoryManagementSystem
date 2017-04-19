@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using InventoryManagementSystem.DAL;
 using InventoryManagementSystem.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace InventoryManagementSystem.Controllers
 {
@@ -37,30 +38,34 @@ namespace InventoryManagementSystem.Controllers
             return View(product);
         }
 
-        // GET: Product/Create
         public ActionResult Create()
         {
+            PopulateDepartmentsDropDownList();
             return View();
         }
 
-        // POST: Product/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Title,InventoryNumber,Price")] Product product)
+        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Product product)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (RetryLimitExceededException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.)
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+            PopulateDepartmentsDropDownList(product.Departments);
             return View(product);
         }
 
-        // GET: Product/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -72,23 +77,44 @@ namespace InventoryManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
+            PopulateDepartmentsDropDownList(product.Departments);
             return View(product);
         }
 
-        // POST: Product/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Title,InventoryNumber,Price")] Product product)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(product);
+            var productToUpdate = db.Products.Find(id);
+            if (TryUpdateModel(productToUpdate, "",
+               new string[] { "Title", "Credits", "DepartmentID" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            PopulateDepartmentsDropDownList(productToUpdate.Departments);
+            return View(productToUpdate);
+        }
+
+        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
+        {
+            var departmentsQuery = from d in db.Departments
+                                   orderby d.Name
+                                   select d;
+            ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
         }
 
         // GET: Product/Delete/5

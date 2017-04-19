@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using InventoryManagementSystem.DAL;
 using InventoryManagementSystem.Models;
 using InventoryManagementSystem.ViewModels;
-
+using System.Data.Entity.Infrastructure;
 
 namespace InventoryManagementSystem.Controllers
 {
@@ -98,7 +98,10 @@ namespace InventoryManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employees
+                .Include(i => i.Assignment)
+                .Where(i => i.ID == id)
+                .Single();
             if (employee == null)
             {
                 return HttpNotFound();
@@ -108,20 +111,40 @@ namespace InventoryManagementSystem.Controllers
         }
 
         // POST: Employee/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstMidName,HireDate")] Employee employee)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "Location", employee.ID);
-            return View(employee);
+            var employeeToUpdate = db.Employees
+               .Include(i => i.Assignment)
+               .Where(i => i.ID == id)
+               .Single();
+
+            if (TryUpdateModel(employeeToUpdate, "",
+               new string[] { "LastName", "FirstMidName", "HireDate", "Assignment" }))
+            {
+                try
+                {
+                    if (String.IsNullOrWhiteSpace(employeeToUpdate.Assignment.Location))
+                    {
+                        employeeToUpdate.Assignment = null;
+                    }
+
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(employeeToUpdate);
         }
 
         // GET: Employee/Delete/5
