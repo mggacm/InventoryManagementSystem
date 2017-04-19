@@ -18,7 +18,7 @@ namespace InventoryManagementSystem.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Employee
-        public ActionResult Index(int? id, int? courseID)
+        public ActionResult Index(int? id, int? productID)
         {
             var viewModel = new EmployeeIndexData();
             viewModel.Employees = db.Employees
@@ -28,16 +28,24 @@ namespace InventoryManagementSystem.Controllers
             
             if (id != null)
             {
-                ViewBag.InstructorID = id.Value;
+                ViewBag.EmployeeID = id.Value;
                 viewModel.Products = viewModel.Employees.Where(
                     i => i.ID == id.Value).Single().Product;
             }
 
-            if (courseID != null)
+            if (productID != null)
             {
-                ViewBag.CourseID = courseID.Value;
-                viewModel.Purchases = viewModel.Products.Where(
-                    x => x.ProductID == courseID).Single().Purchases;
+                ViewBag.ProductID = productID.Value;
+                //viewModel.Purchases = viewModel.Products.Where(
+                //    x => x.ProductID == productID).Single().Purchases;
+                var selectedProduct = viewModel.Products.Where(x => x.ProductID == productID).Single();
+                db.Entry(selectedProduct).Collection(x => x.Purchases).Load();
+                foreach (Purchase purchase in selectedProduct.Purchases)
+                {
+                    db.Entry(purchase).Reference(x => x.Customer).Load();
+                }
+
+                viewModel.Purchases = selectedProduct.Purchases;
             }
 
             return View(viewModel);

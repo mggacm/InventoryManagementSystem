@@ -18,7 +18,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Instructors)
+    @foreach (var item in Model.Employees)
     {
         string selectedRow = "";
         if (item.ID == ViewBag.InstructorID)
@@ -36,9 +36,9 @@
                 @Html.DisplayFor(modelItem => item.HireDate)
             </td>
             <td>
-                @if (item.OfficeAssignment != null)
+                @if (item.Assignment != null)
                 {
-                    @item.OfficeAssignment.Location
+                    @item.Assignment.Location
                 }
             </td>
             <td>
@@ -51,3 +51,64 @@
     }
 
 </table>
+
+@if (Model.Products != null)
+{
+    <h3>Products this employee has sold.</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Number</th>
+            <th>Title</th>
+            <th>Department</th>
+        </tr>
+
+        @foreach (var item in Model.Products)
+        {
+            string selectedRow = "";
+            if (item.ProductID == ViewBag.ProductID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { courseID = item.ProductID })
+                </td>
+                <td>
+                    @item.ProductID
+                </td>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Departments.Name
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@if (Model.Purchases != null)
+{
+    <h3>
+        Customers helped by this Employee
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            @*<th>Grade</th>*@
+        </tr>
+        @foreach (var item in Model.Purchases)
+        {
+            <tr>
+                <td>
+                    @item.Customer.FullName
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>*@
+            </tr>
+        }
+    </table>
+}
