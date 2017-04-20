@@ -21,7 +21,7 @@ namespace InventoryManagementSystem.Models
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
-        public int? InstructorID { get; set; }
+        public int? EmployeeID { get; set; }
 
         public virtual Employee Manager { get; set; }
         public virtual ICollection<Product> Product { get; set; }

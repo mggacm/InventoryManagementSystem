@@ -13,6 +13,7 @@
     
     <div class="form-horizontal">
         <h4>Customer</h4>
+        <h5>@Html.DisplayFor(model => model.FullName)</h5>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)

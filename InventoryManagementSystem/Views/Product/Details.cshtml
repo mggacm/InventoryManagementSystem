@@ -8,15 +8,16 @@
 
 <div>
     <h4>Product</h4>
+    <h5>@Html.DisplayFor(model => model.Title)</h5>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        @*<dt>
             Department
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Departments.Name)
-        </dd>
+        </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.ProductID)
         </dt>
@@ -26,11 +27,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.InventoryNumber)
+            @Html.DisplayNameFor(model => model.Title)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.InventoryNumber)
+            @Html.DisplayFor(model => model.Title)
         </dd>
 
         <dt>

@@ -13,7 +13,7 @@ namespace InventoryManagementSystem.Models
         [ForeignKey("Employee")]
         public int EmployeeID { get; set; }
         [StringLength(50)]
-        [Display(Name = "Office Location")]
+        [Display(Name = "Task")]
         public string Location { get; set; }
 
         public virtual Employee Employee { get; set; }

@@ -46,7 +46,7 @@ namespace InventoryManagementSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Product product)
+        public ActionResult Create([Bind(Include = "ProductID,Title,Price,Department")]Product product)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace InventoryManagementSystem.Controllers
             }
             var productToUpdate = db.Products.Find(id);
             if (TryUpdateModel(productToUpdate, "",
-               new string[] { "Title", "Credits", "DepartmentID" }))
+               new string[] { "Title", "Price", "DepartmentID" }))
             {
                 try
                 {

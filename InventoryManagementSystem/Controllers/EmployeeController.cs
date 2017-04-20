@@ -78,7 +78,7 @@ namespace InventoryManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstMidName,HireDate")] Employee employee)
+        public ActionResult Create([Bind(Include = "ID,LastName,FirstMidName,HireDate,Assignment")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -167,8 +167,21 @@ namespace InventoryManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employees
+                .Include(i => i.Assignment)
+                .Where(d => d.ID == id)
+                .Single();
+
             db.Employees.Remove(employee);
+
+            var department = db.Departments
+                .Where(d => d.EmployeeID == id)
+                .SingleOrDefault();
+            if (department != null)
+            {
+                department.EmployeeID = null;
+            }
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
