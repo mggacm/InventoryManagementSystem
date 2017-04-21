@@ -20,9 +20,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Budget)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
+        
         <th></th>
     </tr>
 
@@ -37,9 +35,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Budget)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
+       
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.DepartmentID }) |
             @Html.ActionLink("Details", "Details", new { id=item.DepartmentID }) |

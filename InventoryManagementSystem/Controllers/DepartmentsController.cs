@@ -11,18 +11,18 @@ using InventoryManagementSystem.Models;
 
 namespace InventoryManagementSystem.Controllers
 {
-    public class DepartmentController : Controller
+    public class DepartmentsController : Controller
     {
         private StoreContext db = new StoreContext();
 
-        // GET: Department
+        // GET: Departments
         public ActionResult Index()
         {
             var departments = db.Departments.Include(d => d.Manager);
             return View(departments.ToList());
         }
 
-        // GET: Department/Details/5
+        // GET: Departments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,19 +37,19 @@ namespace InventoryManagementSystem.Controllers
             return View(department);
         }
 
-        // GET: Department/Create
+        // GET: Departments/Create
         public ActionResult Create()
         {
             ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName");
             return View();
         }
 
-        // POST: Department/Create
+        // POST: Departments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DepartmentID,Name,Budget,StartDate,EmployeeID")] Department department)
+        public ActionResult Create([Bind(Include = "DepartmentID,Name,Budget,EmployeeID")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace InventoryManagementSystem.Controllers
             return View(department);
         }
 
-        // GET: Department/Edit/5
+        // GET: Departments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,12 +78,12 @@ namespace InventoryManagementSystem.Controllers
             return View(department);
         }
 
-        // POST: Department/Edit/5
+        // POST: Departments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DepartmentID,Name,Budget,StartDate,EmployeeID")] Department department)
+        public ActionResult Edit([Bind(Include = "DepartmentID,Name,Budget,EmployeeID")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace InventoryManagementSystem.Controllers
             return View(department);
         }
 
-        // GET: Department/Delete/5
+        // GET: Departments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,7 +110,7 @@ namespace InventoryManagementSystem.Controllers
             return View(department);
         }
 
-        // POST: Department/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
