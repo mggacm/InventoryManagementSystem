@@ -14,6 +14,7 @@ namespace InventoryManagementSystem.Models
 
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
+        [Display(Name = "Total Sales")]
         public decimal Budget { get; set; }
 
         [DataType(DataType.Date)]
@@ -24,6 +25,6 @@ namespace InventoryManagementSystem.Models
         public int? EmployeeID { get; set; }
 
         public virtual Employee Manager { get; set; }
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual ICollection<Assignment> Assignment { get; set; }
     }
 }

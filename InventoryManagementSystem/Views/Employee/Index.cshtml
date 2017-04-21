@@ -1,114 +1,51 @@
-﻿@model InventoryManagementSystem.ViewModels.EmployeeIndexData
+﻿@model IEnumerable<InventoryManagementSystem.Models.Employee>
 
 @{
-    ViewBag.Title = "Employees";
+    ViewBag.Title = "Index";
 }
 
-<h2>Employees</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>Last Name</th>
-        <th>First Name</th>
-        <th>Hire Date</th>
-        <th>Task</th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Assignment.EmployeeID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstMidName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HireDate)
+        </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Employees)
-    {
-        string selectedRow = "";
-        if (item.ID == ViewBag.InstructorID)
-        {
-            selectedRow = "success";
-        }
-        <tr class="@selectedRow">
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstMidName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HireDate)
-            </td>
-            <td>
-                @if (item.Assignment != null)
-                {
-                    @item.Assignment.Location
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Select", "Index", new { id = item.ID }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Assignment.EmployeeID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstMidName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HireDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
 
 </table>
-
-@if (Model.Products != null)
-{
-    <h3>Products this employee has sold.</h3>
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Department</th>
-        </tr>
-
-        @foreach (var item in Model.Products)
-        {
-            string selectedRow = "";
-            if (item.ProductID == ViewBag.ProductID)
-            {
-                selectedRow = "success";
-            }
-            <tr class="@selectedRow">
-                <td>
-                    @Html.ActionLink("Select", "Index", new { courseID = item.ProductID })
-                </td>
-                <td>
-                    @item.ProductID
-                </td>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.Departments.Name
-                </td>
-            </tr>
-        }
-
-    </table>
-}
-
-@if (Model.Purchases != null)
-{
-    <h3>
-        Customers helped by this Employee
-    </h3>
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            @*<th>Grade</th>*@
-        </tr>
-        @foreach (var item in Model.Purchases)
-        {
-            <tr>
-                <td>
-                    @item.Customer.FullName
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.Grade)
-                </td>*@
-            </tr>
-        }
-    </table>
-}

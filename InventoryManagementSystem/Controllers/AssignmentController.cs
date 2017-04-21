@@ -11,112 +11,116 @@ using InventoryManagementSystem.Models;
 
 namespace InventoryManagementSystem.Controllers
 {
-    public class EmployeeController : Controller
+    public class AssignmentController : Controller
     {
         private StoreContext db = new StoreContext();
 
-        // GET: Employee
+        // GET: Assignment
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.Assignment);
-            return View(employees.ToList());
+            var assignments = db.Assignments.Include(a => a.Department).Include(a => a.Employee);
+            return View(assignments.ToList());
         }
 
-        // GET: Employee/Details/5
+        // GET: Assignment/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Assignment assignment = db.Assignments.Find(id);
+            if (assignment == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(assignment);
         }
 
-        // GET: Employee/Create
+        // GET: Assignment/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID");
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "Name");
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName");
             return View();
         }
 
-        // POST: Employee/Create
+        // POST: Assignment/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstMidName,HireDate")] Employee employee)
+        public ActionResult Create([Bind(Include = "EmployeeID,DepartmentID")] Assignment assignment)
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
+                db.Assignments.Add(assignment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID", employee.ID);
-            return View(employee);
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", assignment.DepartmentID);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName", assignment.EmployeeID);
+            return View(assignment);
         }
 
-        // GET: Employee/Edit/5
+        // GET: Assignment/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Assignment assignment = db.Assignments.Find(id);
+            if (assignment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID", employee.ID);
-            return View(employee);
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", assignment.DepartmentID);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName", assignment.EmployeeID);
+            return View(assignment);
         }
 
-        // POST: Employee/Edit/5
+        // POST: Assignment/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstMidName,HireDate")] Employee employee)
+        public ActionResult Edit([Bind(Include = "EmployeeID,DepartmentID")] Assignment assignment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(assignment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID", employee.ID);
-            return View(employee);
+            ViewBag.DepartmentID = new SelectList(db.Departments, "DepartmentID", "Name", assignment.DepartmentID);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName", assignment.EmployeeID);
+            return View(assignment);
         }
 
-        // GET: Employee/Delete/5
+        // GET: Assignment/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Assignment assignment = db.Assignments.Find(id);
+            if (assignment == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(assignment);
         }
 
-        // POST: Employee/Delete/5
+        // POST: Assignment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
+            Assignment assignment = db.Assignments.Find(id);
+            db.Assignments.Remove(assignment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -10,7 +10,7 @@ namespace InventoryManagementSystem.Models
     public class Product
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "Inventory Number")]
+        [Display(Name = "UPC")]
         public int ProductID { get; set; }
 
         [StringLength(50, MinimumLength = 2)]

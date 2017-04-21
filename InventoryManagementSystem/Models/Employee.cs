@@ -32,7 +32,7 @@ namespace InventoryManagementSystem.Models
             get { return LastName + ", " + FirstMidName; }
         }
 
-        public virtual ICollection<Product> Product { get; set; }
+        public virtual ICollection<Department> Department { get; set; }
         public virtual Assignment Assignment { get; set; }
         //public virtual Department Department { get; set; }
     }

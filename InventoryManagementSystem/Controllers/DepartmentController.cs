@@ -11,112 +11,112 @@ using InventoryManagementSystem.Models;
 
 namespace InventoryManagementSystem.Controllers
 {
-    public class EmployeeController : Controller
+    public class DepartmentController : Controller
     {
         private StoreContext db = new StoreContext();
 
-        // GET: Employee
+        // GET: Department
         public ActionResult Index()
         {
-            var employees = db.Employees.Include(e => e.Assignment);
-            return View(employees.ToList());
+            var departments = db.Departments.Include(d => d.Manager);
+            return View(departments.ToList());
         }
 
-        // GET: Employee/Details/5
+        // GET: Department/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(department);
         }
 
-        // GET: Employee/Create
+        // GET: Department/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID");
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName");
             return View();
         }
 
-        // POST: Employee/Create
+        // POST: Department/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstMidName,HireDate")] Employee employee)
+        public ActionResult Create([Bind(Include = "DepartmentID,Name,Budget,StartDate,EmployeeID")] Department department)
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
+                db.Departments.Add(department);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID", employee.ID);
-            return View(employee);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName", department.EmployeeID);
+            return View(department);
         }
 
-        // GET: Employee/Edit/5
+        // GET: Department/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID", employee.ID);
-            return View(employee);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName", department.EmployeeID);
+            return View(department);
         }
 
-        // POST: Employee/Edit/5
+        // POST: Department/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstMidName,HireDate")] Employee employee)
+        public ActionResult Edit([Bind(Include = "DepartmentID,Name,Budget,StartDate,EmployeeID")] Department department)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(department).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.Assignments, "EmployeeID", "EmployeeID", employee.ID);
-            return View(employee);
+            ViewBag.EmployeeID = new SelectList(db.Employees, "ID", "LastName", department.EmployeeID);
+            return View(department);
         }
 
-        // GET: Employee/Delete/5
+        // GET: Department/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Department department = db.Departments.Find(id);
+            if (department == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(department);
         }
 
-        // POST: Employee/Delete/5
+        // POST: Department/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
+            Department department = db.Departments.Find(id);
+            db.Departments.Remove(department);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

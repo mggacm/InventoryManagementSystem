@@ -12,11 +12,14 @@ namespace InventoryManagementSystem.Models
         [Key]
         [ForeignKey("Employee")]
         public int EmployeeID { get; set; }
-        [StringLength(50)]
-        [Display(Name = "Task")]
-        public string Location { get; set; }
+
+
+
+        [Display(Name = "Department ID")]
+        public int DepartmentID { get; set; }
 
         public virtual Employee Employee { get; set; }
-        
+        public virtual ICollection<Department> Department { get; set; }
+
     }
 }
