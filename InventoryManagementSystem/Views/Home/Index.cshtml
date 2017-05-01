@@ -2,25 +2,232 @@
     ViewBag.Title = "The Store";
 }
 
-<div class="jumbotron">
-    <h1>The Store</h1>
-    <p class="lead">Great bikes all year round. </p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Bikes</h2>
-        <p>World famous brands and makes. Road or track bikes.</p>
-        <p><a class="btn btn-default" href="#">View &raquo;</a></p>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Shop Homepage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">VeloWorks</p>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Bikes</a>      <!--Categorys-->
+                    <a href="#" class="list-group-item">Clothes</a>
+                    <a href="#" class="list-group-item">Gear</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="img/Bikesinline.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="img/Youth.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="img/0.08.jpeg" alt="">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="img/racer.JPG" alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">$354.99</h4>
+                                <h4>
+                                    <a href="#">Racer</a>
+                                </h4>
+                                <p>This is a racing bike. Good for tracks.</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="img/roadbike.JPG" alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">$124.99</h4>
+                                <h4>
+                                    <a href="#">Taxi</a>
+                                </h4>
+                                <p>This is a Road bike. Great for paved trails and downtown.</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">12 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="img/fixie.JPG" alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">$74.99</h4>
+                                <h4>
+                                    <a href="#">Fixied Gear</a>
+                                </h4>
+                                <p>This is a fixied gear sprocket. You move it moves. Simple as that.</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">31 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="img/BikeOnCar.jpg" alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">$49.99</h4>
+                                <h4>
+                                    <a href="#">Bike Rack</a>
+                                </h4>
+                                <p>A Rack to put on top of your car to bring your bikes with you on long trips.</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">6 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <img src="img/FIXED.jpg" alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">$1,254.99</h4>
+                                <h4>
+                                    <a href="#">Lola</a>
+                                </h4>
+                                <p>This is an elit custom build fixied gear.</p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">28 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <h4>
+                            <a href="#">Trails near you.</a>
+                        </h4>
+                        <p>If you are looking to get out and get on a trail. Find the closest one to you.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-    <div class="col-md-4">
-        <h2>Clothes</h2>
-        <p>Stylish Wear and Padding.</p>
-        <p><a class="btn btn-default" href="#">View &raquo;</a></p>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+
+
     </div>
-    <div class="col-md-4">
-        <h2>Other Gear</h2>
-        <p>Accsesories</p>
-        <p><a class="btn btn-default" href="#">Learn &raquo;</a></p> 
-    </div>
-</div>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
