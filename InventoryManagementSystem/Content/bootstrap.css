@@ -223,9 +223,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.slide-image {
 
+}
 @media print {
-  * {
+    * {
     color: #000 !important;
     text-shadow: none !important;
     background: transparent !important;
@@ -276,6 +278,7 @@ table {
   }
   .navbar {
     display: none;
+    background-color: white;
   }
   .table td,
   .table th {
@@ -311,11 +314,11 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #333333;
-  background-color: #ffffff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #b94a48;
+    background-color: rgba(16, 16, 16, 0.86);
 }
 
 input,
@@ -331,7 +334,7 @@ button,
 input,
 select[multiple],
 textarea {
-  background-image: none;
+  background-image: none
 }
 
 a {
@@ -6024,6 +6027,7 @@ body.modal-open,
 .carousel-inner > .item > a > img {
   display: block;
   height: auto;
+  
   max-width: 100%;
   line-height: 1;
 }

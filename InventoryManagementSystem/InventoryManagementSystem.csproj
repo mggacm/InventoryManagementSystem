@@ -252,6 +252,8 @@
     <Content Include="img\roadbike.JPG" />
     <Content Include="img\they.mov" />
     <Content Include="img\Trail.jpg" />
+    <Content Include="img\train-15.jpg" />
+    <Content Include="img\trains.jpeg" />
     <Content Include="img\Youth.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
