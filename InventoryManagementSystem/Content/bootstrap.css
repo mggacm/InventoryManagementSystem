@@ -223,9 +223,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-.slide-image {
 
-}
 @media print {
     * {
     color: #000 !important;
@@ -4504,8 +4502,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
-  border-color: #080808;
+    background-color: #5d1b1b;
+    border-color: #080808;
 }
 
 .navbar-inverse .navbar-brand {
