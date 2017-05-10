@@ -355,7 +355,9 @@ a:focus {
 }
 
 img {
-  vertical-align: middle;
+    vertical-align: middle;
+    width: 100%;
+    height: 327px;
 }
 
 .img-responsive {
@@ -6025,9 +6027,7 @@ body.modal-open,
 
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
-  display: block;
-  height: auto;
-  
+  display: block;   
   max-width: 100%;
   line-height: 1;
 }
