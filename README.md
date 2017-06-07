@@ -3,7 +3,7 @@ A MVC cataloging system using .NET.
 
 Similar to ContosoUniversity.
 
-[logo]: SolutionItems/ScreenShots/Capture.PNG
+[logo]: http://github.com/SolutionItems/ScreenShots/Capture.PNG
 
 
 
