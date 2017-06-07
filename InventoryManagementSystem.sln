@@ -5,12 +5,16 @@ VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManagementSystem", "InventoryManagementSystem\InventoryManagementSystem.csproj", "{B5FB919D-1D54-4808-870D-38A653ED6ABE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{44B432F8-B855-443D-9814-84B6792C5EEB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{44B432F8-B855-443D-9814-84B6792C5EEB}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScreenShots", "ScreenShots", "{956D42F2-0762-4EFC-A962-55658DEA85A9}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Pictures\new\Capture.PNG = ..\..\..\Pictures\new\Capture.PNG
+		..\..\..\Pictures\new\Capture1.PNG = ..\..\..\Pictures\new\Capture1.PNG
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
